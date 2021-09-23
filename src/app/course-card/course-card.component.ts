@@ -46,4 +46,11 @@ export class CourseCardComponent implements OnInit {
     // }
   }
 
+  cardStyles() {
+    return {
+      'font-style': (this.course.description.charAt(0) == "A") ? 'italic' : 'inherit',
+      'color': (this.course.description.charAt(0) == "R") ? 'green' : 'inherit'
+    };
+  }
+
 }
