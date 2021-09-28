@@ -25,8 +25,8 @@ export class AppComponent implements AfterViewInit {
   constructor() {}
 
   ngAfterViewInit() {
-    console.log(this.cards.first);
-    this.cards.changes.subscribe((cards) => console.log(cards));
+    // console.log(this.cards.first);
+    // this.cards.changes.subscribe((cards) => console.log(cards));
   }
 
   onCourseSelected(course: Course) {}

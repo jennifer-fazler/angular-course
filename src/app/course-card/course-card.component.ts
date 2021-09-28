@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild } from '@angular/core';
 import { CourseImageComponent } from '../course-image/course-image.component';
 import {Course} from '../model/course';
 
@@ -7,7 +7,7 @@ import {Course} from '../model/course';
   templateUrl: './course-card.component.html',
   styleUrls: ['./course-card.component.css']
 })
-export class CourseCardComponent implements OnInit, AfterViewInit {
+export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   @Input()
   course:Course;
@@ -24,13 +24,18 @@ export class CourseCardComponent implements OnInit, AfterViewInit {
   // image;
 
   // @ContentChild(CourseImageComponent)
-  @ContentChild(CourseImageComponent, {read: ElementRef})
-  image: CourseImageComponent;
+  @ContentChildren(CourseImageComponent)
+  images: QueryList<CourseImageComponent>;
 
   constructor() { }
 
   ngAfterViewInit() {
-    console.log(this.image);
+
+  }
+
+  ngAfterContentInit() {
+    console.log(this.images);
+
   }
 
   ngOnInit(): void {
