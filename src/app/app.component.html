@@ -5,15 +5,13 @@
 
 </div>
 
+<button (click)="onCoursesEdited()">Edit Courses</button>
+
 <div class="courses" #container>
-  <course-card #cardRef1
-    (courseSelected)="onCourseSelected($event)" [course]="courses[0]">
+  <course-card *ngFor="let course of courses"
+    (courseSelected)="onCourseSelected($event)"
+    [course]="course">
   </course-card>
-
-  <course-card #cardRef2
-    (courseSelected)="onCourseSelected($event)" [course]="courses[1]">
-  </course-card>
-
 </div>
 
 
