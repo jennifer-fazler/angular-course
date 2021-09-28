@@ -7,10 +7,36 @@
 
 <button (click)="onCoursesEdited()">Edit Courses</button>
 
-<div class="courses" #container>
-  <course-card *ngFor="let course of courses"
+<div class="courses" *ngIf="courses[0] as course">
+  <course-card
     (courseSelected)="onCourseSelected($event)"
     [course]="course">
+
+
+    <!-- content that we want to pass to the component-->
+
+    <div class="course-image">
+      <img #courseImage width="300" alt="Angular Logo"
+      [src]="course.iconUrl">
+      <h5>total lessons: 5</h5>
+    </div>
+
+    <!-- <h5>total lessons: 5</h5> -->
+
+    <div class="course-description">
+      {{ course.longDescription }}
+    </div>
+
+    Edit Description: <textarea></textarea>
+
+  </course-card>
+
+
+  <course-card
+    (courseSelected)="onCourseSelected($event)"
+    [course]="courses[1]">
+
+    <h5>total lessons: 10</h5>
   </course-card>
 </div>
 
