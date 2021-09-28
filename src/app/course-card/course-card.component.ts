@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { CourseImageComponent } from '../course-image/course-image.component';
 import {Course} from '../model/course';
 
 @Component({
@@ -6,7 +7,7 @@ import {Course} from '../model/course';
   templateUrl: './course-card.component.html',
   styleUrls: ['./course-card.component.css']
 })
-export class CourseCardComponent implements OnInit {
+export class CourseCardComponent implements OnInit, AfterViewInit {
 
   @Input()
   course:Course;
@@ -17,7 +18,20 @@ export class CourseCardComponent implements OnInit {
   @Output('courseSelected')
   courseEmitter = new EventEmitter<Course>();
 
+  // @ContentChild('container')  -- this will not work. scope is restricted to content part of the component
+
+  // @ContentChild('courseImage')
+  // image;
+
+  // @ContentChild(CourseImageComponent)
+  @ContentChild(CourseImageComponent, {read: ElementRef})
+  image: CourseImageComponent;
+
   constructor() { }
+
+  ngAfterViewInit() {
+    console.log(this.image);
+  }
 
   ngOnInit(): void {
   }
@@ -27,7 +41,7 @@ export class CourseCardComponent implements OnInit {
   }
 
   onCourseViewed() {
-    console.log("card component - button clicked ...");
+    // console.log("card component - button clicked ...");
     this.courseEmitter.emit(this.course);
   }
 

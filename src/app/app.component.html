@@ -5,8 +5,6 @@
 
 </div>
 
-<button (click)="onCoursesEdited()">Edit Courses</button>
-
 <div class="courses" *ngIf="courses[0] as course">
   <course-card
     (courseSelected)="onCourseSelected($event)"
@@ -14,14 +12,16 @@
 
 
     <!-- content that we want to pass to the component-->
+    <course-image [src]="course.iconUrl"></course-image>
 
-    <div class="course-image">
+    <!-- <div class="course-image">
       <img #courseImage width="300" alt="Angular Logo"
       [src]="course.iconUrl">
       <h5>total lessons: 5</h5>
-    </div>
+    </div> -->
 
     <!-- <h5>total lessons: 5</h5> -->
+    <h5>total lessons: 5</h5>
 
     <div class="course-description">
       {{ course.longDescription }}

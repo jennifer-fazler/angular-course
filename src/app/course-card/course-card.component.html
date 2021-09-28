@@ -1,17 +1,19 @@
 <ng-container *ngIf="course">
   <div class="course-card"
-  [ngClass]="cardClasses()" [ngStyle]="cardStyles()">
+  [ngClass]="cardClasses()" [ngStyle]="cardStyles()" #container>
 
     <div class="course-title">
         {{ cardIndex || '' + ' ' + course.description }}
     </div>
 
     <!-- <ng-content select="img"></ng-content> -->
-    <ng-content select=".course-image"></ng-content>
+    <!-- <ng-content select=".course-image"></ng-content> -->
+    <ng-content select="course-image"></ng-content>
 
     <ng-content select=".course-description"></ng-content>
 
-    <ng-content></ng-content>
+    <!-- Using ng-content again will display any previously unmatched content -->
+    <!-- <ng-content></ng-content> -->
 
     <ng-container [ngSwitch]="course.category">
       <div class="course-category">
