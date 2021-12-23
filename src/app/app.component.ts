@@ -6,6 +6,7 @@ import {HighlightedDirective} from './directives/highlighted.directive';
 import {Observable} from 'rxjs';
 import { CoursesService } from './services/courses.service';
 import { HttpClient } from '@angular/common/http';
+import { AppConfig, APP_CONFIG, CONFIG_TOKEN } from './config';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,11 @@ export class AppComponent implements OnInit {
 
   courses$ : Observable<Course[]>;
 
-  constructor(private coursesService: CoursesService) {
+  constructor(
+    private coursesService: CoursesService,
+    @Inject(CONFIG_TOKEN) private config: AppConfig) {
 
-    console.log("root component " + this.coursesService.id);
+      console.log(config);
 
   }
 
