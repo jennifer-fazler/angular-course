@@ -5,15 +5,15 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 let counter = 0;
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CoursesService {
 
   id:number;
 
   constructor(private http: HttpClient) {
     counter++;
+
+    console.log("Created CoursesService instance " + counter);
 
     this.id = counter;
   }
