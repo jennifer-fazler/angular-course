@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
 
   constructor(private coursesService: CoursesService) {
 
+    console.log("root component " + this.coursesService.id);
+
   }
 
   ngOnInit() {
