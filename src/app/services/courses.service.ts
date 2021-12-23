@@ -13,8 +13,6 @@ export class CoursesService {
   constructor(private http: HttpClient) {
     counter++;
 
-    console.log("Created CoursesService instance " + counter);
-
     this.id = counter;
   }
 
