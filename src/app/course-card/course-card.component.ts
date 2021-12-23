@@ -21,10 +21,7 @@ import { CoursesService } from '../services/courses.service';
 @Component({
     selector: 'course-card',
     templateUrl: './course-card.component.html',
-    styleUrls: ['./course-card.component.css'],
-    providers: [
-      CoursesService
-    ]
+    styleUrls: ['./course-card.component.css']
 })
 export class CourseCardComponent implements OnInit {
 
@@ -38,11 +35,15 @@ export class CourseCardComponent implements OnInit {
     courseEmitter = new EventEmitter<Course>();
 
 
-    constructor(@SkipSelf() private coursesService: CoursesService) {
+    constructor() {
 
     }
 
     ngOnInit() {
+    }
+
+    onTitleChanged(newTitle:string) {
+      this.course.description = newTitle;
     }
 
 

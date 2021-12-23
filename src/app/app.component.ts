@@ -11,25 +11,19 @@ import { AppConfig, APP_CONFIG, CONFIG_TOKEN } from './config';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [
-    CoursesService
-  ]
-})
+  styleUrls: ['./app.component.css']})
 export class AppComponent implements OnInit {
 
-  courses$ : Observable<Course[]>;
+  courses = COURSES;
 
   constructor(
     private coursesService: CoursesService,
     @Inject(CONFIG_TOKEN) private config: AppConfig) {
 
-      console.log(config);
-
   }
 
   ngOnInit() {
-    this.courses$ = this.coursesService.loadCourses();
+
   }
 
   save(course:Course) {
