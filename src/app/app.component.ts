@@ -26,6 +26,15 @@ export class AppComponent implements OnInit {
 
   }
 
+  onEditCourse() {
+
+    const course = this.courses[0];
+    const newCourse:any = {...course};
+    newCourse.description = 'new value!';
+    // this.courses[0].description = "new value!"; // does not work with OnPush change detection
+    this.courses[0] = newCourse;
+  }
+
   save(course:Course) {
     if (course == undefined) return;
     this.coursesService.saveCourse(course)
