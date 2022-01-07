@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ngOnInit");
+    // console.log("ngOnInit");
 
     // this.courses$ = this.coursesService.loadCourses();
     // this.coursesService.loadCourses()
@@ -38,13 +38,17 @@ export class AppComponent implements OnInit {
   }
 
   onEditCourse() {
-    this.courses = [undefined];
+    // this.courses[0].description = 'ngOnChanges';
+    // this.courses = [undefined];
 
-    // const course = this.courses[0];
-    // const newCourse:any = {...course};
-    // newCourse.description = 'new value!';
-    // // this.courses[0].description = "new value!"; // does not work with OnPush change detection
-    // this.courses[0] = newCourse;
+    const course = this.courses[0];
+    const newCourse:any = {
+      ...course,
+      description: 'ngOnChanges',
+      cardIndex: 1
+    };
+    // this.courses[0].description = "new value!"; // does not work with OnPush change detection
+    this.courses[0] = newCourse;
   }
 
   save(course:Course) {

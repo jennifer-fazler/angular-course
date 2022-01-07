@@ -10,11 +10,13 @@ import {
     EventEmitter,
     Inject,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Output,
     QueryList,
     Self,
+    SimpleChanges,
     SkipSelf,
     ViewEncapsulation
 } from '@angular/core';
@@ -28,7 +30,7 @@ import { CoursesService } from '../services/courses.service';
     styleUrls: ['./course-card.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseCardComponent implements OnInit, OnDestroy {
+export class CourseCardComponent implements OnInit, OnDestroy, OnChanges {
 
     @Input()
     course: Course;
@@ -50,6 +52,10 @@ export class CourseCardComponent implements OnInit, OnDestroy {
                   console.log("constructor", this.course);
 
 
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        console.log("ngOnChanges", changes);
     }
 
     ngOnInit() {
