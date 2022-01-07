@@ -11,34 +11,17 @@ import { AppConfig, APP_CONFIG, CONFIG_TOKEN } from './config';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, DoCheck {
+export class AppComponent implements OnInit {
 
   // courses$:Observable<Course[]>;
 
   courses: Course[];
 
-  loaded = false;
-
   constructor(
     private coursesService: CoursesService,
-    @Inject(CONFIG_TOKEN) private config: AppConfig,
-    private cd: ChangeDetectorRef) {
-
-  }
-
-  ngDoCheck(): void {
-    console.log("ngDoCheck");
-
-    if (this.loaded) {
-      this.cd.markForCheck();
-      console.log("called cd.markForCheck");
-      this.loaded = undefined;
-    }
-
-
+    @Inject(CONFIG_TOKEN) private config: AppConfig) {
 
   }
 
@@ -47,9 +30,6 @@ export class AppComponent implements OnInit, DoCheck {
     this.coursesService.loadCourses()
       .subscribe(courses => {
         this.courses = courses;
-        // this.cd.markForCheck();
-        this.loaded = true;
-
       });
 
   }
