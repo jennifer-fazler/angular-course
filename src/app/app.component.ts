@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, InjectionToken, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, ElementRef, Inject, InjectionToken, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {COURSES} from '../db-data';
 import {Course} from './model/course';
 import {CourseCardComponent} from './course-card/course-card.component';
@@ -14,22 +14,43 @@ import { AppConfig, APP_CONFIG, CONFIG_TOKEN } from './config';
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, DoCheck {
 
-  courses$:Observable<Course[]>;
+  // courses$:Observable<Course[]>;
 
-  // courses: Course[];
+  courses: Course[];
+
+  loaded = false;
 
   constructor(
     private coursesService: CoursesService,
-    @Inject(CONFIG_TOKEN) private config: AppConfig) {
+    @Inject(CONFIG_TOKEN) private config: AppConfig,
+    private cd: ChangeDetectorRef) {
+
+  }
+
+  ngDoCheck(): void {
+    console.log("ngDoCheck");
+
+    if (this.loaded) {
+      this.cd.markForCheck();
+      console.log("called cd.markForCheck");
+      this.loaded = undefined;
+    }
+
+
 
   }
 
   ngOnInit() {
-    this.courses$ = this.coursesService.loadCourses();
-    // this.coursesService.loadCourses()
-    //   .subscribe(courses => this.courses = courses);
+    // this.courses$ = this.coursesService.loadCourses();
+    this.coursesService.loadCourses()
+      .subscribe(courses => {
+        this.courses = courses;
+        // this.cd.markForCheck();
+        this.loaded = true;
+
+      });
 
   }
 

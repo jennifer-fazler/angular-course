@@ -3,6 +3,7 @@ import {
     AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
@@ -42,8 +43,9 @@ export class CourseCardComponent implements OnInit {
 
 
     constructor(private coursesService: CoursesService,
-                @Attribute('type') private type: string) {
-        console.log(type);
+                @Attribute('type') private type: string,
+                private cd: ChangeDetectorRef) {
+
 
     }
 
