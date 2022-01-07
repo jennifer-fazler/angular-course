@@ -17,24 +17,28 @@ export class AppComponent implements OnInit {
 
   // courses$:Observable<Course[]>;
 
-  courses: Course[];
+  courses: Course[] = COURSES;
 
   constructor(
     private coursesService: CoursesService,
     @Inject(CONFIG_TOKEN) private config: AppConfig) {
+      // console.log("constructor");
 
   }
 
   ngOnInit() {
+    console.log("ngOnInit");
+
     // this.courses$ = this.coursesService.loadCourses();
-    this.coursesService.loadCourses()
-      .subscribe(courses => {
-        this.courses = courses;
-      });
+    // this.coursesService.loadCourses()
+    //   .subscribe(courses => {
+    //     this.courses = courses;
+    //   });
 
   }
 
   onEditCourse() {
+    this.courses = [undefined];
 
     // const course = this.courses[0];
     // const newCourse:any = {...course};

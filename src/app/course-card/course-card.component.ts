@@ -10,6 +10,7 @@ import {
     EventEmitter,
     Inject,
     Input,
+    OnDestroy,
     OnInit,
     Output,
     QueryList,
@@ -27,7 +28,7 @@ import { CoursesService } from '../services/courses.service';
     styleUrls: ['./course-card.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseCardComponent implements OnInit {
+export class CourseCardComponent implements OnInit, OnDestroy {
 
     @Input()
     course: Course;
@@ -46,11 +47,18 @@ export class CourseCardComponent implements OnInit {
                 @Attribute('type') private type: string,
                 private cd: ChangeDetectorRef) {
 
+                  console.log("constructor", this.course);
+
 
     }
 
     ngOnInit() {
-      // console.log(this.type);
+      console.log("ngOnInit", this.course);
+    }
+
+    ngOnDestroy(): void {
+      console.log("ngOnDestroy");
+
     }
 
     onTitleChanged(newTitle:string) {
