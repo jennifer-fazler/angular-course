@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Inject, InjectionToken, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, InjectionToken, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {COURSES} from '../db-data';
 import {Course} from './model/course';
 import {CourseCardComponent} from './course-card/course-card.component';
@@ -11,10 +11,14 @@ import { AppConfig, APP_CONFIG, CONFIG_TOKEN } from './config';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']})
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
 export class AppComponent implements OnInit {
 
-  courses = COURSES;
+  courses$:Observable<Course[]>;
+
+  // courses: Course[];
 
   constructor(
     private coursesService: CoursesService,
@@ -23,16 +27,19 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.courses$ = this.coursesService.loadCourses();
+    // this.coursesService.loadCourses()
+    //   .subscribe(courses => this.courses = courses);
 
   }
 
   onEditCourse() {
 
-    const course = this.courses[0];
-    const newCourse:any = {...course};
-    newCourse.description = 'new value!';
-    // this.courses[0].description = "new value!"; // does not work with OnPush change detection
-    this.courses[0] = newCourse;
+    // const course = this.courses[0];
+    // const newCourse:any = {...course};
+    // newCourse.description = 'new value!';
+    // // this.courses[0].description = "new value!"; // does not work with OnPush change detection
+    // this.courses[0] = newCourse;
   }
 
   save(course:Course) {
