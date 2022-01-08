@@ -22,9 +22,8 @@ import {
     SkipSelf,
     ViewEncapsulation
 } from '@angular/core';
-import {Course} from '../model/course';
-import {CourseImageComponent} from '../course-image/course-image.component';
-import { CoursesService } from '../services/courses.service';
+import { Course } from 'src/app/model/course';
+import { CoursesService } from '../courses.service';
 
 @Component({
     selector: 'course-card',
